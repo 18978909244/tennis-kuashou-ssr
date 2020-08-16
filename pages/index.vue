@@ -49,7 +49,10 @@
 
     <div class="py-16 bg-gray-100">
       <div class="container mx-auto lg:px-12">
-        <div class="flex flex-wrap">
+        <div class="w-64 mx-auto text-center text-2xl font-bold py-8 border-b">
+          网球话题
+        </div>
+        <div class="mt-16 flex flex-wrap">
           <nuxt-link
             :to="`/topic/${item.key}`"
             v-for="item in keywordList"
@@ -94,7 +97,7 @@
                 <div class="bg-white rounded-lg overflow-hidden flex flex-col">
                   <el-image
                     :src="item.cover_image"
-                    class="w-full h-24"
+                    class="w-full h-32"
                   ></el-image>
                   <div class="text-gray-700 p-4">
                     <div class="my-2 text-sm">{{ item.title }}</div>

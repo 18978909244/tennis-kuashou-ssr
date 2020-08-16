@@ -3,10 +3,10 @@
     <TopMenu />
     <div class="screen mx-auto py-8">
       <div>
-        <span
-          @click="$router.push('/')"
-          class="cursor-pointer hover:text-blue-500"
-          >小网球</span
+        <nuxt-link to="/">
+          <span class="cursor-pointer hover:text-blue-500"
+            >小网球</span
+          ></nuxt-link
         >
         >
         <span>搜索 “{{ detail.name }}”</span>

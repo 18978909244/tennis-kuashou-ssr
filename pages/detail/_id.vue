@@ -4,10 +4,10 @@
     <div class="bg-white">
       <div class="screen mx-auto py-8">
         <div>
-          <span
-            @click="$router.push('/')"
-            class="cursor-pointer hover:text-blue-500"
-            >小网球</span
+          <nuxt-link to="/">
+            <span class="cursor-pointer hover:text-blue-500"
+              >小网球</span
+            ></nuxt-link
           >
           > 资讯 >
           <span>{{ detail.title }}</span>
@@ -30,6 +30,21 @@
           <div class="text-gray-600">{{ detail.publish_time }}</div>
         </div>
         <div v-html="detail.content" class="mt-8"></div>
+        <div v-if="linkList.length > 0" class="mt-18">
+          <div class="py-2 border-b">推荐阅读</div>
+          <div>
+            <nuxt-link
+              v-for="link in linkList"
+              :key="link.id"
+              :to="`/detail/${link.weixinid}`"
+              class="mt-4 flex flex-col inline-block"
+              >{{ link.title }}
+              <span class="mr-2 text-gray-500 text-xs">{{
+                link.publish_time
+              }}</span>
+            </nuxt-link>
+          </div>
+        </div>
       </div>
     </div>
     <Footer />
@@ -73,14 +88,23 @@ export default {
         weixinid: id
       }
     })
+    const linkList = await context.$axios.$post('info/link', {
+      name: detail.title
+    })
     return {
       detail: {
         ...detail,
         publish_time: moment(detail.publish_time).format('YYYY年MM月DD日')
       },
+      linkList: linkList.map(item => {
+        return {
+          ...item,
+          publish_time: moment(item.publish_time).format('YYYY年MM月DD日')
+        }
+      }),
       title: detail.title,
       keywords: detail.title,
-      description: detail.description
+      description: detail.title
     }
   },
   head() {

@@ -5,9 +5,10 @@
     >
       <div class="flex items-center text-base">
         <nuxt-link to="/">
-          <div class="w-40 mx-4 cursor-pointer">
-            <img :src="getName('logo_img')" /></div
-        ></nuxt-link>
+          <h2 class="w-40 mx-4 cursor-pointer">
+            {{ getName('site_name') }}
+          </h2></nuxt-link
+        >
         <!-- <div
           @click="$router.push('/')"
           class="hover:text-red-500 mx-4 cursor-pointer"

@@ -5,8 +5,8 @@ module.exports = {
   mode: 'universal',
   // model:'spa',
   server: {
-    host: '0.0.0.0',
-    // host: 'localhost',
+    // host: '0.0.0.0',
+    host: 'localhost',
     port: 3197 // default: 3000
   },
 

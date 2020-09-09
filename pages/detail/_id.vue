@@ -16,17 +16,16 @@
       <div class="screen mx-auto bg-white p-24 rounded-lg">
         <h1 class="text-center text-2xl font-bold my-4">{{ detail.title }}</h1>
         <div class="flex justify-between items-center my-20">
-          <div
-            @click="$router.push(`/owner/${detail.owner_id}`)"
-            class="flex items-center"
+          <nuxt-link :to="`/owner/${detail.owner_id}`">
+            <div class="flex items-center">
+              <img
+                :src="detail.owner.image"
+                mode=""
+                class="w-12 h-12 rounded-full"
+              />
+              <div class="ml-2">{{ detail.owner.name }}</div>
+            </div></nuxt-link
           >
-            <img
-              :src="detail.owner.image"
-              mode=""
-              class="w-12 h-12 rounded-full"
-            />
-            <div class="ml-2">{{ detail.owner.name }}</div>
-          </div>
           <div class="text-gray-600">{{ detail.publish_time }}</div>
         </div>
         <div v-html="detail.content" class="mt-8"></div>

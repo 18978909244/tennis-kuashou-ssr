@@ -98,7 +98,7 @@ export default {
   },
   head() {
     return {
-      title: this.detail.title
+      title: this.detail.name
     }
   },
   created() {

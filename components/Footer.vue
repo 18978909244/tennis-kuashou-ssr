@@ -12,9 +12,11 @@
             小网球 tennis.kuashou.com
           </div>
         </nuxt-link>
-        <div class="mx-4 cursor-pointer">
-          网站地图
-        </div>
+        <nuxt-link :to="`/sitemap_index.xml`">
+          <div class="mx-4 cursor-pointer">
+            网站地图
+          </div></nuxt-link
+        >
         <div
           @mousemove="qrShow = true"
           @mouseleave="qrShow = false"

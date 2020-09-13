@@ -18,7 +18,7 @@ export default {
                 'updated_at',
                 'is_cache',
                 'is_front',
-                'is_controll'
+                'is_control'
               ]
             }
           },
@@ -36,7 +36,7 @@ export default {
                     'updated_at',
                     'is_cache',
                     'is_front',
-                    'is_controll'
+                    'is_control'
                   ]
                 }
               }
@@ -52,9 +52,17 @@ export default {
               is_show: true,
               order: -1
             },
-            attributes: {
-              exclude: ['content']
-            }
+            attributes: [
+              'cover_image',
+              'title',
+              'content_url',
+              'resource_id',
+              'digest',
+              'is_show',
+              'order',
+              'weixinid',
+              'publish_time'
+            ]
           }
         },
         keywordList: {
@@ -80,6 +88,7 @@ export default {
     //       }
     //     }
     //   })
+    console.log(result.infoList[0])
     commit('setData', {
       ...result
       // setting

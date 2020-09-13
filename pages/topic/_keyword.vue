@@ -86,9 +86,17 @@ export default {
       },
       order: [['publish_time', 'DESC']],
       limit: 24,
-      attributes: {
-        exclude: ['content']
-      }
+      attributes: [
+        'cover_image',
+        'title',
+        'content_url',
+        'resource_id',
+        'digest',
+        'is_show',
+        'order',
+        'weixinid',
+        'publish_time'
+      ]
     })
     console.log('list', list)
     return {

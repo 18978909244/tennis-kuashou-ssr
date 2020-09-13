@@ -16,7 +16,7 @@ export default function({ store, redirect, app: { $axios } }) {
       const token = `${store.state.projectName}-token`
       // config.withCredentials = true
       config.headers[token] = store.state.token
-      config.headers['client-type'] = 1
+      config.headers['client-type'] = 0
       return config
     },
     error => {

@@ -73,9 +73,17 @@ export default {
         },
         order: [['publish_time', 'DESC']],
         limit: 30,
-        attributes: {
-          exclude: ['content']
-        }
+        attributes: [
+          'cover_image',
+          'title',
+          'content_url',
+          'resource_id',
+          'digest',
+          'is_show',
+          'order',
+          'weixinid',
+          'publish_time'
+        ]
       }
     )
     return {

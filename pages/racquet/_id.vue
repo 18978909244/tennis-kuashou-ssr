@@ -4,9 +4,9 @@
     <div class="screen mx-auto py-8">
       <div>
         <nuxt-link to="/">
-          <span class="cursor-pointer hover:text-blue-500"
-            >小网球</span
-          ></nuxt-link
+          <span class="cursor-pointer hover:text-blue-500">{{
+            getName('site_name')
+          }}</span></nuxt-link
         >
         >
         <span>{{ detail.name }}</span>
@@ -15,17 +15,18 @@
     <div class="screen mx-auto bg-white p-24 rounded-lg">
       <div class="flex flex-col justify-center items-center py-4 border-b">
         <img
-          :src="detail.image"
+          :src="detail.racquet_detail.image_list[0]"
           :alt="detail.name"
-          class="w-24 h-24 rounded-full my-2"
+          class="w-64 h-64 rounded-full my-2"
         />
-        <h1 class="text-center text-2xl font-bold my-4">{{ detail.name }}</h1>
-
-        <div class="text-gray-600">{{ detail.desc }}</div>
+        <h1 class="text-center text-2xl font-bold my-4">
+          {{ detail.name }}
+        </h1>
+        <div class="text-gray-600">{{ detail.racquet_detail.desc }}</div>
       </div>
       <div class="container mx-auto lg:px-12">
         <div class="mt-16 ">
-          <ArticleList :list="list" />
+          <!-- <ArticleList :list="list" /> -->
         </div>
       </div>
     </div>
@@ -37,12 +38,12 @@
 import { mapState, mapGetters } from 'vuex'
 // import moment from 'dayjs'
 
-import ArticleList from '@/components/ArticleList'
+// import ArticleList from '@/components/ArticleList'
 import TopMenu from '@/components/TopMenu'
 import Footer from '@/components/Footer'
 export default {
   components: {
-    ArticleList,
+    // ArticleList,
     TopMenu,
     Footer
   },
@@ -68,33 +69,34 @@ export default {
       params: { id }
     } = context
 
-    const detail = await context.$axios.$post('owner/findOne', {
+    const detail = await context.$axios.$post('racquet/findOne', {
       where: {
         id
-      }
+      },
+      include: (app => {
+        return [
+          {
+            model: app.model.racquet_detail
+          }
+        ]
+      }).toString()
     })
 
-    const list = await context.$axios.$post('info/findAll', {
-      where: {
-        owner_id: id
-      },
-      order: [['publish_time', 'DESC']],
-      limit: 24,
-      attributes: [
-        'cover_image',
-        'title',
-        'content_url',
-        'resource_id',
-        'digest',
-        'is_show',
-        'order',
-        'weixinid',
-        'publish_time'
-      ]
-    })
+    console.log('detail', detail)
+
+    // const list = await context.$axios.$post('info/findAll', {
+    //   where: {
+    //     owner_id: id
+    //   },
+    //   order: [['publish_time', 'DESC']],
+    //   limit: 24,
+    //   attributes: {
+    //     exclude: ['content']
+    //   }
+    // })
     return {
       detail,
-      list,
+      // list,
 
       title: detail.name,
       keywords: detail.name,

@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="py-16 bg-gray-100">
+    <div class="py-16 bg-white">
       <div class="container mx-auto lg:px-12">
         <div class="w-64 mx-auto text-center text-2xl font-bold py-8 border-b">
           最新资讯
@@ -79,7 +79,43 @@
       </div>
     </div>
 
-    <div class="py-16 bg-white">
+    <div class="py-16 bg-gray-100">
+      <div class="container mx-auto lg:px-12">
+        <div class="flex justify-between items-center ">
+          <div class="font-bold">推荐球拍</div>
+          <div class="text-gray-500 text-xs">更多球拍 ></div>
+        </div>
+        <div class="flex flex-wrap justify-between items-stretch my-10">
+          <nuxt-link
+            :to="`/racquet/${item.id}`"
+            v-for="item in randomRacquetList"
+            :key="item.id"
+            :class="`w-1/${randomRacquetNumber}`"
+          >
+            <div class="cursor-pointer">
+              <div class="m-4">
+                <div class="bg-white rounded-lg overflow-hidden flex flex-col">
+                  <el-image
+                    :src="item.thumb_image"
+                    class="w-24 mx-auto"
+                  ></el-image>
+                  <div class="text-gray-700 p-4">
+                    <div class="my-2 text-sm">{{ item.name }}</div>
+                    <div
+                      class="text-white text-center mt-4 text-sm bg-red-500 px-2 py-1 rounded"
+                    >
+                      {{ item.brand }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="py-16 bg-white">
       <div class="container mx-auto lg:px-12">
         <div class="flex justify-between items-center ">
           <div class="font-bold">猜你喜欢</div>
@@ -91,6 +127,40 @@
             v-for="item in randomList"
             :key="item.id"
             :class="`w-1/${randomNumber}`"
+          >
+            <div class="cursor-pointer">
+              <div class="m-4">
+                <div class="bg-white rounded-lg overflow-hidden flex flex-col">
+                  <el-image
+                    :src="item.cover_image"
+                    class="w-full h-32"
+                  ></el-image>
+                  <div class="text-gray-700 p-4">
+                    <div class="my-2 text-sm">{{ item.title }}</div>
+                    <div class="text-gray-600 mt-4 text-sm">
+                      {{ item.publish_time | moment('YYYY-MM-DD HH:mm') }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="py-16 bg-gray-100">
+      <div class="container mx-auto lg:px-12">
+        <div class="flex justify-between items-center ">
+          <div class="font-bold">猜你喜欢</div>
+          <div class="text-gray-500 text-xs">更多资讯 ></div>
+        </div>
+        <div class="flex flex-wrap justify-between items-stretch my-10">
+          <nuxt-link
+            :to="`/detail/${item.weixinid}`"
+            v-for="item in randomInfoList"
+            :key="item.id"
+            :class="`w-1/${randomInfoNumber}`"
           >
             <div class="cursor-pointer">
               <div class="m-4">
@@ -140,7 +210,13 @@ export default {
     }
   },
   computed: {
-    ...mapState(['setting', 'infoList', 'keywordList', 'ownerList']),
+    ...mapState([
+      'setting',
+      'infoList',
+      'racquetList',
+      'keywordList',
+      'ownerList'
+    ]),
     ...mapGetters(['getName', 'getList']),
     cooperateNumber: function() {
       const startTime = moment('2018-01-01')
@@ -158,14 +234,22 @@ export default {
   },
   async asyncData(context) {
     const { store, $axios } = context
-    const randomNumber = 5
-    const randomList = await $axios.$post('info/random', {
-      number: randomNumber,
+    const randomInfoNumber = 5
+    const randomRacquetNumber = 6
+    const randomInfoList = await $axios.$post('info/random', {
+      number: randomInfoNumber,
       attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
     })
+    const randomRacquetList = await $axios.$post('racquet/random', {
+      number: randomRacquetNumber
+      // attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
+    })
+    console.log('randomRacquetList', randomRacquetList)
     return {
-      randomNumber,
-      randomList,
+      randomInfoNumber,
+      randomInfoList,
+      randomRacquetList,
+      randomRacquetNumber,
       title: store.getters.getName('seo_index_title'),
       description: store.getters.getName('seo_index_desc'),
       keywords: store.getters.getName('seo_index_keyword')

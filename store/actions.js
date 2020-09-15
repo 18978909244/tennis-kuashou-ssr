@@ -71,7 +71,13 @@ export default {
           order: [['weight_number', 'DESC']]
         },
         ownerList: {
-          url: 'owner/findAll'
+          url: 'owner/findAll',
+          where: {
+            name: {
+              $ne: ''
+            }
+          },
+          attributes: ['id', 'name', 'desc', 'image']
         }
       },
       excludes
@@ -88,7 +94,7 @@ export default {
     //       }
     //     }
     //   })
-    console.log(result.infoList[0])
+
     commit('setData', {
       ...result
       // setting

@@ -1,4 +1,5 @@
 const axios = require('axios')
+const webpack = require('webpack')
 const pkg = require('./package')
 
 module.exports = {
@@ -100,6 +101,11 @@ module.exports = {
     extractCSS: {
       allChunks: true
     },
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: 'jquery'
+      })
+    ],
     // publicPath: 'http://localhost:3001/software',
     /*
      ** You can extend webpack config her

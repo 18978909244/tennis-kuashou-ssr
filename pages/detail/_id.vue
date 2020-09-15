@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 import { mapState, mapGetters } from 'vuex'
 import moment from 'dayjs'
 import TopMenu from '@/components/TopMenu'
@@ -87,6 +88,7 @@ export default {
         weixinid: id
       }
     })
+    // console.log(detail)
     const linkList = await context.$axios.$post('info/link', {
       name: detail.title
     })
@@ -130,7 +132,52 @@ export default {
   created() {
     this.init()
   },
-  mounted() {},
+  mounted() {
+    const getArgs = function(url) {
+      if (!url) return false
+      // get url querystring
+      const params = url.replace('?', '&')
+      const reg = /(?:^\?|&)(.*?)=(.*?)(?=&|$)/g
+      let temp
+      const args = {}
+      while ((temp = reg.exec(params)) != null)
+        args[temp[1]] = decodeURIComponent(temp[2])
+      return args
+    }
+    const self = this
+    $('iframe.video_iframe').each(async function(item) {
+      const orgUrl = $(this).attr('data-src')
+      const vid = getArgs(orgUrl).vid
+      const node = $(this).parent('p')
+      if (vid) {
+        const result = await self.$axios
+          .post('video/qq', {
+            vid
+          })
+          .then(res => res.data)
+        console.log(result)
+        if (result && result.video) {
+          const html = `<video controls='true' src='${result.video}' poster='${
+            result.image
+          }' width='${getArgs(orgUrl).width}' class='mx-auto'></video>`
+          console.log(html)
+          node.html(html)
+        }
+        console.log('vid', vid)
+      }
+
+      // $.ajax({
+      //   url: `video/${vid}`,
+      //   complete: data => {
+      //     const res = data.responseJSON
+      //     const html = `<video controls='true' src='${res.video}' poster='${
+      //       res.img
+      //     }' width='${getArgs(orgUrl).width}'></video>`
+      //     node.html(html)
+      //   }
+      // })
+    })
+  },
   methods: {
     init() {}
   }

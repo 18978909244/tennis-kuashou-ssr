@@ -79,7 +79,7 @@
       </div>
     </div>
 
-    <div class="py-16 bg-gray-100">
+    <!-- <div class="py-16 bg-gray-100">
       <div class="container mx-auto lg:px-12">
         <div class="flex justify-between items-center ">
           <div class="font-bold">推荐球拍</div>
@@ -113,7 +113,7 @@
           </nuxt-link>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- <div class="py-16 bg-white">
       <div class="container mx-auto lg:px-12">
@@ -240,15 +240,15 @@ export default {
       number: randomInfoNumber,
       attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
     })
-    const randomRacquetList = await $axios.$post('racquet/random', {
-      number: randomRacquetNumber
-      // attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
-    })
-    console.log('randomRacquetList', randomRacquetList)
+    // const randomRacquetList = await $axios.$post('racquet/random', {
+    //   number: randomRacquetNumber
+    //   // attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
+    // })
+    // console.log('randomRacquetList', randomRacquetList)
     return {
       randomInfoNumber,
       randomInfoList,
-      randomRacquetList,
+      randomRacquetList: [],
       randomRacquetNumber,
       title: store.getters.getName('seo_index_title'),
       description: store.getters.getName('seo_index_desc'),

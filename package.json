@@ -23,6 +23,7 @@
     "cross-env": "^5.2.0",
     "dayjs": "^1.8.33",
     "element-ui": "^2.4.11",
+    "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",
     "koa": "^2.6.2",
     "koa2": "^2.0.0-alpha.7",

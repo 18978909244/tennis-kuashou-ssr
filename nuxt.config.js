@@ -31,9 +31,10 @@ module.exports = {
       }
     ],
     script: [
-      // {
-      //   src: 'https://cdn.bootcss.com/vue/2.6.10/vue.min.js'
-      // }
+      {
+        // src: 'https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js',
+        // ssr: true
+      }
     ],
     link: [
       {
@@ -102,9 +103,9 @@ module.exports = {
       allChunks: true
     },
     plugins: [
-      new webpack.ProvidePlugin({
-        $: 'jquery'
-      })
+      // new webpack.ProvidePlugin({
+      //   $: 'jquery'
+      // })
     ],
     // publicPath: 'http://localhost:3001/software',
     /*

@@ -10,6 +10,7 @@ export default function({ store, redirect, app: { $axios } }) {
     process.env.NODE_ENV === 'production'
       ? `https://tennis.kuashou.com/${store.state.projectName}`
       : `http://localhost:3001/${store.state.projectName}`
+  console.log('$axios.defaults.baseURL', $axios.defaults.baseURL)
   $axios.defaults.timeout = 10000
   $axios.interceptors.request.use(
     config => {

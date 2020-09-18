@@ -3,7 +3,7 @@ export default {
     await dispatch('asyncInitData')
   },
   async asyncInitData({ commit, state }, excludes = []) {
-    const result = await this.$axios.$post('system/initData', {
+    const result = await this.$axios.$post('system/initDataWithCache', {
       includes: {
         setting: {
           url: 'setting/findAll',
@@ -82,6 +82,8 @@ export default {
       },
       excludes
     })
+
+    console.log('result', result)
 
     // const setting = result.setting
     //   .filter(item => item.parent_id !== 0)

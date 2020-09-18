@@ -19,11 +19,11 @@
           <nuxt-link :to="`/owner/${detail.owner_id}`">
             <div class="flex items-center">
               <img
-                :src="detail.owner.image"
+                :src="detail.owner && detail.owner.image"
                 mode=""
                 class="w-12 h-12 rounded-full"
               />
-              <div class="ml-2">{{ detail.owner.name }}</div>
+              <div class="ml-2">{{ detail.owner && detail.owner.name }}</div>
             </div></nuxt-link
           >
           <div class="text-gray-600">{{ detail.publish_time }}</div>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import $ from 'jquery'
+// import $ from 'jquery'
 import { mapState, mapGetters } from 'vuex'
 import moment from 'dayjs'
 import TopMenu from '@/components/TopMenu'
@@ -88,7 +88,6 @@ export default {
         weixinid: id
       }
     })
-    // console.log(detail)
     const linkList = await context.$axios.$post('info/link', {
       name: detail.title
     })
@@ -129,54 +128,50 @@ export default {
       meta
     }
   },
-  created() {
-    this.init()
-  },
+  // created() {
+  //   this.init()
+  // },
   mounted() {
-    const getArgs = function(url) {
-      if (!url) return false
-      // get url querystring
-      const params = url.replace('?', '&')
-      const reg = /(?:^\?|&)(.*?)=(.*?)(?=&|$)/g
-      let temp
-      const args = {}
-      while ((temp = reg.exec(params)) != null)
-        args[temp[1]] = decodeURIComponent(temp[2])
-      return args
-    }
-    const self = this
-    $('iframe.video_iframe').each(async function(item) {
-      const orgUrl = $(this).attr('data-src')
-      const vid = getArgs(orgUrl).vid
-      const node = $(this).parent('p')
-      if (vid) {
-        const result = await self.$axios
-          .post('video/qq', {
-            vid
-          })
-          .then(res => res.data)
-        console.log(result)
-        if (result && result.video) {
-          const html = `<video controls='true' src='${result.video}' poster='${
-            result.image
-          }' width='${getArgs(orgUrl).width}' class='mx-auto'></video>`
-          console.log(html)
-          node.html(html)
-        }
-        console.log('vid', vid)
-      }
-
-      // $.ajax({
-      //   url: `video/${vid}`,
-      //   complete: data => {
-      //     const res = data.responseJSON
-      //     const html = `<video controls='true' src='${res.video}' poster='${
-      //       res.img
-      //     }' width='${getArgs(orgUrl).width}'></video>`
-      //     node.html(html)
-      //   }
-      // })
-    })
+    // const self = this
+    // if (this.detail.content.includes('iframe')) {
+    //   import('jquery').then($ => {
+    //     console.log('has frame')
+    // const getArgs = function(url) {
+    //   if (!url) return false
+    //   // get url querystring
+    //   const params = url.replace('?', '&')
+    //   const reg = /(?:^\?|&)(.*?)=(.*?)(?=&|$)/g
+    //   let temp
+    //   const args = {}
+    //   while ((temp = reg.exec(params)) != null)
+    //     args[temp[1]] = decodeURIComponent(temp[2])
+    //   return args
+    // }
+    // $('iframe.video_iframe').each(async function(item) {
+    //   const orgUrl = $(this).attr('data-src')
+    //   console.log('orgUrl', orgUrl)
+    //   const vid = getArgs(orgUrl).vid
+    //   const node = $(this).parent('p')
+    //   console.log('node', node)
+    //   if (vid) {
+    //     const result = await self.$axios
+    //       .post('video/qq', {
+    //         vid
+    //       })
+    //       .then(res => res.data)
+    //     if (result && result.video) {
+    //       const html = `<video controls='true' src='${
+    //         result.video
+    //       }' poster='${result.image}' width='${
+    //         getArgs(orgUrl).width
+    //       }' class='mx-auto'></video>`
+    //       console.log(html)
+    //       node.html(html)
+    //     }
+    //   }
+    // })
+    //   })
+    // }
   },
   methods: {
     init() {}

@@ -12,7 +12,7 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "pm2": "pm2 start npm --name 'tennis-server' -- run start  --watch"
+    "pm2": "pm2 start npm --name 'tennis-server' -- run start --watch"
   },
   "dependencies": {
     "@gauseen/nuxt-proxy": "^1.0.1",

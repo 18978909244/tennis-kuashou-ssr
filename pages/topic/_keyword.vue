@@ -90,7 +90,6 @@ export default {
         'cover_image',
         'title',
         'content_url',
-        'resource_id',
         'digest',
         'is_show',
         'order',

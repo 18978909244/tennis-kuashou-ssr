@@ -55,9 +55,6 @@ export default {
             attributes: [
               'cover_image',
               'title',
-              'content_url',
-              'resource_id',
-              'digest',
               'is_show',
               'order',
               'weixinid',

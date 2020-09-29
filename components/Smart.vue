@@ -71,7 +71,6 @@
 
 <script>
 const handleType = name => {
-  console.log(name)
   if (name.startsWith('is_')) {
     return 'switch'
   } else {
@@ -125,10 +124,6 @@ export default {
   },
   methods: {
     valueChange(e, keyName) {
-      console.log({
-        key: keyName,
-        value: e
-      })
       this.$emit('valueChange', {
         key: keyName,
         value: e

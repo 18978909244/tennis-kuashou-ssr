@@ -80,8 +80,6 @@ export default {
       excludes
     })
 
-    console.log('result', result)
-
     // const setting = result.setting
     //   .filter(item => item.parent_id !== 0)
     //   .map(item => {
@@ -93,7 +91,6 @@ export default {
     //       }
     //     }
     //   })
-
     commit('setData', {
       ...result
       // setting

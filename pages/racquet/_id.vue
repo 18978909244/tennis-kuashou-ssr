@@ -82,8 +82,6 @@ export default {
       }).toString()
     })
 
-    console.log('detail', detail)
-
     // const list = await context.$axios.$post('info/findAll', {
     //   where: {
     //     owner_id: id

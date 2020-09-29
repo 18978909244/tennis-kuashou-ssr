@@ -43,18 +43,12 @@ export default {
   mounted() {
     this.initBannerHeight()
     window.onresize = () => {
-      console.log('dd')
       this.initBannerHeight()
     }
   },
   methods: {
     async imgLoad(e) {
       await this.$nextTick()
-      console.log(
-        'this.$refs.bannerHeight[0].imageHeight',
-        document.querySelector('#banner').clientHeight
-      )
-      console.log(document.querySelector('#banner').clientHeight)
       this.imageHeight =
         (document.querySelector('#banner').clientWidth * 600) / 1500
     },

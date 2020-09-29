@@ -1,7 +1,7 @@
 const axios = require('axios')
 const webpack = require('webpack')
 const pkg = require('./package')
-
+const LRU = require('lru-cache')
 module.exports = {
   mode: 'universal',
   // model:'spa',
@@ -10,14 +10,14 @@ module.exports = {
     host: 'localhost',
     port: 3197 // default: 3000
   },
-
+  telemetry: false,
+  cache: true,
   /*
    ** Headers of the page
    */
   head: {
     title: pkg.name,
-    meta: [
-      {
+    meta: [{
         charset: 'utf-8'
       },
       {
@@ -30,19 +30,15 @@ module.exports = {
         content: pkg.description
       }
     ],
-    script: [
-      {
-        // src: 'https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js',
-        // ssr: true
-      }
-    ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      }
-    ]
+    script: [{
+      // src: 'https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js',
+      // ssr: true
+    }],
+    link: [{
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    }]
   },
   /*
    ** Customize the progress-bar color
@@ -92,7 +88,13 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
   render: {
-    resourceHints: false
+    resourceHints: false,
+    bundleRenderer: {
+      cache: new LRU({
+        max: 1000,
+        maxAge: 1000 * 60 * 15
+      })
+    }
   },
   /*
    ** Build configuration

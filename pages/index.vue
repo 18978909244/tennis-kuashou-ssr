@@ -195,7 +195,13 @@ import Banner from '@/components/Banner'
 import Footer from '@/components/Footer'
 import ArticleList from '@/components/ArticleList'
 export default {
+  name: 'Home',
   components: { ArticleList, TopMenu, Footer, Banner },
+  serverCacheKey() {
+    // Will change every 10 secondes
+    const cacheTime = Math.floor(Date.now() / (1000 * 60))
+    return cacheTime
+  },
   data() {
     return {
       submitLoading: false,
@@ -207,6 +213,7 @@ export default {
         desc: ''
       },
       search: ''
+      // time: new Date()
     }
   },
   computed: {
@@ -278,27 +285,27 @@ export default {
   },
   created() {},
   mounted() {
-    if (process.browser) {
-      import('wowjs').then(WOW => {
-        new WOW.WOW().init()
-      })
-    }
+    // if (process.browser) {
+    //   import('wowjs').then(WOW => {
+    //     new WOW.WOW().init()
+    //   })
+    // }
   },
   methods: {
-    onSubmit() {
-      this.submitLoading = true
-      setTimeout(() => {
-        this.submitLoading = false
-        this.$message.success('提交成功，我们已经收到您的需求')
-        this.form = {
-          name: '',
-          mobile: '',
-          type: [],
-          price: '',
-          desc: ''
-        }
-      }, 1000)
-    }
+    // onSubmit() {
+    //   this.submitLoading = true
+    //   setTimeout(() => {
+    //     this.submitLoading = false
+    //     this.$message.success('提交成功，我们已经收到您的需求')
+    //     this.form = {
+    //       name: '',
+    //       mobile: '',
+    //       type: [],
+    //       price: '',
+    //       desc: ''
+    //     }
+    //   }, 1000)
+    // }
   }
 }
 </script>

@@ -88,9 +88,14 @@ export default {
         weixinid: id
       }
     })
-    const linkList = await context.$axios.$post('info/link', {
+    let linkList = await context.$axios.$post('info/link', {
       name: detail.title
     })
+    if (linkList.length === 0) {
+      linkList = await context.$axios.$post('info/random', {
+        number: 5
+      })
+    }
     return {
       detail: {
         ...detail,

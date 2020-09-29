@@ -97,7 +97,6 @@ export default {
         'publish_time'
       ]
     })
-    console.log('list', list)
     return {
       detail,
       list

@@ -5,10 +5,8 @@
       <div class="screen mx-auto py-8">
         <div>
           <nuxt-link to="/">
-            <span class="cursor-pointer hover:text-blue-500"
-              >小网球</span
-            ></nuxt-link
-          >
+            <span class="cursor-pointer hover:text-blue-500">小网球</span>
+          </nuxt-link>
           > 资讯 >
           <span>{{ detail.title }}</span>
         </div>
@@ -24,8 +22,8 @@
                 class="w-12 h-12 rounded-full"
               />
               <div class="ml-2">{{ detail.owner && detail.owner.name }}</div>
-            </div></nuxt-link
-          >
+            </div>
+          </nuxt-link>
           <div class="text-gray-600">{{ detail.publish_time }}</div>
         </div>
         <div v-html="detail.content" class="mt-8"></div>
@@ -83,6 +81,8 @@ export default {
       params: { id }
     } = context
 
+    if (!id) context.error({ statusCode: 404, message: 'Page not found' })
+
     const detail = await context.$axios.$post('info/findOne', {
       where: {
         weixinid: id
@@ -92,9 +92,12 @@ export default {
       name: detail.title
     })
     if (linkList.length === 0) {
-      linkList = await context.$axios.$post('info/random', {
-        number: 5
-      })
+      try {
+        linkList = await context.$axios.$post('info/random', {
+          number: 5,
+          attributes: ['id', 'title', 'weixinid', 'publish_time']
+        })
+      } catch (e) {}
     }
     return {
       detail: {

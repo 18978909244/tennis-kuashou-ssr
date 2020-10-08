@@ -5,22 +5,12 @@ import {
   Image,
   Carousel,
   CarouselItem,
-  Form,
-  Table,
   Switch,
-  Menu,
-  FormItem,
-  MenuItem,
-  TableColumn,
   Popover,
   Tag,
-  Upload,
   Dialog,
-  ColorPicker,
-  MenuItemGroup,
   InputNumber,
   Message,
-  Submenu,
   Loading,
   MessageBox,
   Tooltip
@@ -36,20 +26,10 @@ export default () => {
     .use(Input)
     .use(InputNumber)
     .use(Button)
-    .use(Form)
-    .use(FormItem)
-    .use(Table)
     .use(Switch)
-    .use(Menu)
-    .use(MenuItem)
-    .use(MenuItemGroup)
-    .use(TableColumn)
     .use(Popover)
     .use(Tag)
-    .use(Upload)
     .use(Dialog)
-    .use(ColorPicker)
-    .use(Submenu)
     .use(Tooltip)
 
   Vue.prototype.$confirm = MessageBox.confirm

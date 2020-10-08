@@ -1,7 +1,7 @@
 const axios = require('axios')
 const webpack = require('webpack')
-const pkg = require('./package')
 const LRU = require('lru-cache')
+const pkg = require('./package')
 module.exports = {
   mode: 'universal',
   // model:'spa',
@@ -11,7 +11,7 @@ module.exports = {
     port: 3197 // default: 3000
   },
   telemetry: false,
-  cache: true,
+  // cache: true,
   /*
    ** Headers of the page
    */
@@ -31,8 +31,7 @@ module.exports = {
       }
     ],
     script: [{
-      // src: 'https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js',
-      // ssr: true
+      src: 'https://hm.baidu.com/hm.js?18f698b22eef9dcffbf83383c1c52265'
     }],
     link: [{
       rel: 'icon',
@@ -46,6 +45,7 @@ module.exports = {
   loading: {
     color: '#fff'
   },
+  components: true,
 
   /*
    ** Global CSS
@@ -56,6 +56,12 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: ['@/plugins/element-ui', '@/plugins/axios'],
+  buildModules: [
+    // https://go.nuxtjs.dev/eslint
+    // '@nuxtjs/eslint-module',
+    // https://go.nuxtjs.dev/tailwindcss
+    '@nuxtjs/tailwindcss'
+  ],
   /*
    ** Nuxt.js modules
    */

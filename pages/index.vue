@@ -79,18 +79,18 @@
       </div>
     </div>
 
-    <!-- <div class="py-16 bg-gray-100">
+    <div class="py-16 bg-gray-100">
       <div class="container mx-auto lg:px-12">
         <div class="flex justify-between items-center ">
-          <div class="font-bold">推荐球拍</div>
-          <div class="text-gray-500 text-xs">更多球拍 ></div>
+          <div class="font-bold">推荐网球拍</div>
+          <div class="text-gray-500 text-xs">更多网球拍 ></div>
         </div>
         <div class="flex flex-wrap justify-between items-stretch my-10">
           <nuxt-link
             :to="`/racquet/${item.id}`"
             v-for="item in randomRacquetList"
             :key="item.id"
-            :class="`w-1/${randomRacquetNumber}`"
+            class="w-1/6"
           >
             <div class="cursor-pointer">
               <div class="m-4">
@@ -100,7 +100,7 @@
                     class="w-24 mx-auto"
                   ></el-image>
                   <div class="text-gray-700 p-4">
-                    <div class="my-2 text-sm">{{ item.name }}</div>
+                    <div class="my-2 text-sm">{{ item.name }} 网球拍</div>
                     <div
                       class="text-white text-center mt-4 text-sm bg-red-500 px-2 py-1 rounded"
                     >
@@ -113,7 +113,7 @@
           </nuxt-link>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- <div class="py-16 bg-white">
       <div class="container mx-auto lg:px-12">
@@ -160,7 +160,7 @@
             :to="`/detail/${item.weixinid}`"
             v-for="item in randomInfoList"
             :key="item.id"
-            :class="`w-1/${randomInfoNumber}`"
+            class="w-1/6"
           >
             <div class="cursor-pointer">
               <div class="m-4">
@@ -195,13 +195,13 @@ import Banner from '@/components/Banner'
 import Footer from '@/components/Footer'
 import ArticleList from '@/components/ArticleList'
 export default {
-  name: 'Home',
+  // name: 'Home',
   components: { ArticleList, TopMenu, Footer, Banner },
-  serverCacheKey() {
-    // Will change every 10 secondes
-    const cacheTime = Math.floor(Date.now() / (1000 * 60))
-    return cacheTime
-  },
+  // serverCacheKey() {
+  //   // Will change every 10 secondes
+  //   const cacheTime = Math.floor(Date.now() / (1000 * 60))
+  //   return cacheTime
+  // },
   data() {
     return {
       submitLoading: false,
@@ -247,19 +247,23 @@ export default {
       number: randomInfoNumber,
       attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
     })
-    // const randomRacquetList = await $axios.$post('racquet/random', {
-    //   number: randomRacquetNumber
-    //   // attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
-    // })
+    const randomRacquetList = await $axios.$post('racquet/random', {
+      number: randomRacquetNumber
+      // attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
+    })
     // console.log('randomRacquetList', randomRacquetList)
     return {
-      randomInfoNumber,
+      // randomInfoNumber,
       randomInfoList,
-      randomRacquetList: [],
-      randomRacquetNumber,
-      title: store.getters.getName('seo_index_title'),
-      description: store.getters.getName('seo_index_desc'),
-      keywords: store.getters.getName('seo_index_keyword')
+      randomRacquetList,
+      // randomRacquetNumber,
+      title: store.getters.getName('seo_index_title') || '小网球',
+      description:
+        store.getters.getName('seo_index_desc') ||
+        '小网球 | 汇集网球资讯、网球技术、网球视频、网球球员等精彩内容","小网球，做最全的网球网，收录所有最新最热网球信息","网球，网球拍，网球技术，网球视频，网球资讯，网球社区',
+      keywords:
+        store.getters.getName('seo_index_keyword') ||
+        '网球，网球拍，网球技术，网球视频，网球资讯，网球社区'
     }
   },
   head() {

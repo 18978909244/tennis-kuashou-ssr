@@ -1,0 +1,8 @@
+#
+# robots.txt for Discuz! X2.5
+#
+
+User-agent: *
+
+Disallow: /tennis/
+Disallow: /_nuxt/

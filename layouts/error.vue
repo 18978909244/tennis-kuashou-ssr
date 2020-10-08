@@ -25,15 +25,6 @@
             >
               Home
             </div>
-            <div
-              @click="$router.push('../sitemap/')"
-              class="text-4xl text-blue-500 cursor-pointer"
-            >
-              Sitemap
-            </div>
-          </div>
-          <div class="ml-4">
-            <el-image :src="getName('404_image')"></el-image>
           </div>
           <!-- <div>11{{ image }}{{ title }}</div> -->
         </div>

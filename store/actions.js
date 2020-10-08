@@ -69,12 +69,14 @@ export default {
         },
         ownerList: {
           url: 'owner/findAll',
-          where: {
-            name: {
-              $ne: ''
-            }
-          },
-          attributes: ['id', 'name', 'desc', 'image']
+          data: {
+            where: {
+              name: {
+                $ne: ''
+              }
+            },
+            attributes: ['id', 'name', 'image']
+          }
         }
       },
       excludes

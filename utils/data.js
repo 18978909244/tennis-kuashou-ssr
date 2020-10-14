@@ -108,7 +108,42 @@ export const attributeList = [
   }
 ]
 
+export const stringAttributeList = [
+  {
+    key: 'feel',
+    name: '手感'
+  },
+  {
+    key: 'durab',
+    name: '耐打'
+  },
+  {
+    key: 'power',
+    name: '力量'
+  },
+  {
+    key: 'comport',
+    name: '舒适'
+  },
+  {
+    key: 'comport',
+    name: '舒适'
+  },
+  {
+    key: 'control',
+    name: '控制'
+  },
+  {
+    key: 'spin',
+    name: '上旋'
+  },
+  {
+    key: 'overall',
+    name: '总分'
+  }
+]
 export default {
   reviewList,
-  attributeList
+  attributeList,
+  stringAttributeList
 }

@@ -115,6 +115,39 @@
       </div>
     </div>
 
+    <div class="py-16 bg-white">
+      <div class="container mx-auto lg:px-12">
+        <div class="flex justify-between items-center ">
+          <div class="font-bold">推荐网球线</div>
+          <div class="text-gray-500 text-xs">更多网球线 ></div>
+        </div>
+        <div class="flex flex-wrap justify-between items-stretch my-10">
+          <nuxt-link
+            :to="`/string/${item.id}`"
+            v-for="item in randomStringList"
+            :key="item.id"
+            class="w-1/6"
+          >
+            <div class="cursor-pointer">
+              <div class="m-4">
+                <div class="bg-white rounded-lg overflow-hidden flex flex-col">
+                  <el-image :src="item.image" class="w-24 mx-auto"></el-image>
+                  <div class="text-gray-700 p-4">
+                    <div class="my-2 text-sm">{{ item.name }} 网球线</div>
+                    <div
+                      class="text-white text-center mt-4 text-sm bg-red-500 px-2 py-1 rounded"
+                    >
+                      总评：{{ item.overall }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
+      </div>
+    </div>
+
     <!-- <div class="py-16 bg-white">
       <div class="container mx-auto lg:px-12">
         <div class="flex justify-between items-center ">
@@ -243,19 +276,23 @@ export default {
     const { store, $axios } = context
     const randomInfoNumber = 5
     const randomRacquetNumber = 6
+    const stringRacquetNumber = 6
     const randomInfoList = await $axios.$post('info/random', {
       number: randomInfoNumber,
       attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
     })
     const randomRacquetList = await $axios.$post('racquet/random', {
       number: randomRacquetNumber
-      // attributes: ['id', 'cover_image', 'title', 'publish_time', 'weixinid']
+    })
+    const randomStringList = await $axios.$post('string/random', {
+      number: stringRacquetNumber
     })
     // console.log('randomRacquetList', randomRacquetList)
     return {
       // randomInfoNumber,
       randomInfoList,
       randomRacquetList,
+      randomStringList,
       // randomRacquetNumber,
       title: store.getters.getName('seo_index_title') || '小网球',
       description:
